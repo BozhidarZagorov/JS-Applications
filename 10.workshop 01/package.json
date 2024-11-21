@@ -1,0 +1,21 @@
+{
+  "name": "10.workshop-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "firebase": "^11.0.2",
+    "lit-html": "^3.2.1",
+    "page": "^1.11.6"
+  }
+}
