@@ -48,9 +48,9 @@ export default async function detailsView(ctx) {
     // console.log(isOwner);
     const likesCount = await getLikeCount(itemId);
     const hasUserLikedItems = await getLikeInfo(itemId) === 1;
-    console.log(hasUserLikedItems);
-    console.log(isOwner);
-    console.log(userData.accessToken);
+    // console.log(hasUserLikedItems);
+    // console.log(isOwner);
+    // console.log(userData.accessToken);
     
     
     
