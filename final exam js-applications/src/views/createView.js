@@ -5,53 +5,43 @@ import page from "../../lib/page.js";
 const template = (onSubmit) => html`
 <!-- Create Page (Only for logged-in users) -->
 <section id="create">
-          <div class="form">
-            <img class="border" src="./images/border.png" alt="">
-            <h2>Add Character</h2>
-            <form @submit=${onSubmit} class="create-form">
-              <input type="text" name="category" id="category" placeholder="Character Type"/>
-              <input type="text" name="image-url" id="image-url" placeholder="Image URL"/>
-              <textarea id="description" name="description" placeholder="Description" rows="2" cols="10"></textarea>
-            <textarea id="additional-info" name="additional-info" placeholder="Additional Info" rows="2" cols="10"></textarea>
-              <button type="submit">Add Character</button>
-            </form>
-            <img class="border" src="./images/border.png" alt="">
-          </div>
-        </section>
+        <div class="form form-item">
+          <h2>Add Drone Offer</h2>
+          <form @submit=${onSubmit} class="create-form">
+            <input type="text" name="model" id="model" placeholder="Drone Model" />
+            <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+            <input type="number" name="price" id="price" placeholder="Price" />
+            <input type="number" name="weight" id="weight" placeholder="Weight" />
+            <input type="number" name="phone" id="phone" placeholder="Phone Number for Contact" />
+            <input type="text" name="condition" id="condition" placeholder="Condition" />
+            <textarea name="description" id="description" placeholder="Description"></textarea>
+            <button type="submit">Add</button>
+          </form>
+
+        </div>
+      </section>
 `
 export default async function createView(ctx) {
-    render(template(createFormSubmitHandler))
+    render(template(createFormSubmitHandler.bind(ctx)))
 }
 
 async function createFormSubmitHandler(e) {
     e.preventDefault()
 
     const formData = new FormData(e.currentTarget)
-    // const data = Object.fromEntries(formData)
-
-    const category = formData.get('category')
-    const imageUrl = formData.get('image-url')
-    const description = formData.get('description')
-    const moreInfo = formData.get('additional-info')
+    const data = Object.fromEntries(formData)
 
 
-    // if (!Object.values(data).every(value=>!!value)) {
-    //     return alert('All fields are required!')
-    // }
-    if (!category || !imageUrl ||!description || !moreInfo) {
-        return alert('All fields are required!')
-    }
-    const character = {
-        category,
-        imageUrl,
-        description,
-        moreInfo
+    if (!Object.values(data).every(value=>!!value)) {
+        // return alert('All fields are required!')
+        return this.showNotification('All fields are required!')
+
     }
 
     try {
-        await create(character)
+        await create(data)
 
-        page.redirect('/characters')
+        page.redirect('/marketplace')
     } catch (err) {
         alert(err.message)
     }

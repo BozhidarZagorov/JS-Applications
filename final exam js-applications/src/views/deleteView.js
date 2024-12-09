@@ -13,7 +13,7 @@ export default async function deleteView(ctx) {
     try {
         await remove(itemId)
         
-        page.redirect('/characters')
+        page.redirect('/marketplace')
     } catch (err) {
         alert(err.message)
     }
